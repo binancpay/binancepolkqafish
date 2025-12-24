@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Express buy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<script>
+  // Sahifa yuklanganda admin sozlamalarini yuklash
+  window.addEventListener("load", function () {
+    const saved = JSON.parse(localStorage.getItem("adminSettings"));
+    if (saved) {
+      // Profil ismini yangilash
+      const profileName = document.getElementById("profile-name");
+      if (profileName && saved.name && saved.name.trim() !== "") {
+        profileName.textContent = saved.name.toUpperCase();
+      }
+
+      // Profil rasmini yangilash
+      const profileImage = document.getElementById("profile-image");
+      if (profileImage && saved.avatar && saved.avatar.trim() !== "") {
+        profileImage.src = saved.avatar;
+        profileImage.onerror = function() {
+          this.src = "img/fallback.png"; // Agar rasm yuklanmasa, fallback
+        };
+      }
+
+      // Agar kerak bo‘lsa, boshqa ma'lumotlarni ham ishlatishingiz mumkin
+      // Masalan: saved.username, saved.amount, saved.card, saved.extra
+    }
+  });
+</script>
+<body>
+  <div class="top-bar">
+    <div class="top-left">
+      <div class="user-profile">
+        <img id="profile-image" src="img/fallback.png" alt="Avatar" />
+        <span id="profile-name">FOYDALANUVCHI</span>
+      </div>
+    </div>
+    <div class="right-menu">
+      <a href="#">Order history</a>
+      <a href="#">VIP xizmat</a>
+      <a href="#">Verifikatsiya</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="left">
+      <h1>Buy crypto in a<br>few steps</h1>
+      <p>Bitcoin, Ethereum, Tether, Solana, and more popular crypto</p>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <div class="tabs">
+          <button class="tab active">O'TKAZISH</button>
+          <button class="tab">ALMASHTIRISH</button>
+        </div>
+        <div class="form">
+          <div class="field">
+            <label>SIZ QABUL QILASIZ</label>
+            <div class="input-wrap">
+              <input type="number" value="2307.54" />
+              <span class="currency">
+    <img src="https://flagcdn.com/w40/ru.png" width="20" alt="RUB"/> RUBL
+              </span>
+            </div>
+            <small>1 USDT = 13,930.43 UZS</small>
+          </div>
+
+          <div class="field">
+            <label>SIZ TO‘LAYSIZ</label>
+            <div class="input-wrap">
+              <input type="number" value="32145000.00" />
+              <span class="currency">
+                <img src="https://flagcdn.com/w40/uz.png" width="20" alt="uzbekistan" /> UZS
+              </span>
+            </div>
+            <small>567,870~223,144,477.00 UZS</small>
+          </div>
+
+          <div class="field card-field">
+            <div class="input-wrap">
+              <input type="text" value="4073420079297630" />
+              <span class="dropdown-icon">&#9662;</span>
+            </div>
+          </div>
+
+          <button class="buy-button" onclick="openModal()">USDT O'TKAZISH</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="errorModal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" width="50" />
+      </div>
+
+      <h3>XATO</h3>
+      <p id="modal-text">...</p>
+      <div id="countdown"></div>
+      <div class="modal-buttons">
+        <button onclick="closeModal()">BEKOR QILISH</button>
+        <button class="primary">DAVOM ETISH</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
